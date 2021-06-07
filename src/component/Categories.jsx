@@ -1,39 +1,41 @@
-import { render } from '@testing-library/react';
-import React from 'react';
+import React, { useState } from 'react';
 
-class Categories extends React.Component {
+function Categories({ items }) {
 
-    constructor(props) {
-        super(props);
-        this.activateItem = this.activateItem.bind(this);
-        this.state = {
-            activeItem: 3
-        };
+    const [activeItem, changeActiveItem] = useState(null);
+
+    const changeClassOfActiveElement = (index) => {
+        changeActiveItem(index);
     }
 
-    activateItem = (index) => {
-        this.setState({
-            activeItem: index
-        });
-    }
+    return (
+        <div className="categories">
+            <ul>
+                <li
+                    onClick={() => changeClassOfActiveElement(null)}
+                    className={activeItem === null ? 'active' : ''} >
 
-    render() {
-        const { items } = this.props;
-        return (
-            <div className="categories">
-                <ul>
-                    {
-                        items.map((item, index) => <li
-                            onClick={() => this.activateItem(index)}
-                            className={this.state.activeItem === index ? 'active' : ''}
-                            key={item}>
-                            {item}
-                        </li>)
-                    }
-                </ul>
-            </div>
-        )
-    }
+                    Все
+                    
+                </li>
+
+                {items &&
+                    items.map((item, index) => {
+                        return (
+                            <li
+                                onClick={() => changeClassOfActiveElement(index)}
+                                className={activeItem === index ? 'active' : ''}
+                                key={item} >
+
+                                {item}
+
+                            </li>
+                        )
+                    })
+                }
+            </ul>
+        </div>
+    )
 }
 
 export default Categories;

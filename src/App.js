@@ -14,7 +14,6 @@ function App() {
           <div className="content__top">
             <Categories
               items={[
-                'Все',
                 'Мясные',
                 'Вегетарианская',
                 'Гриль',
