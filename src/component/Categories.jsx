@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 function Categories({ items }) {
 
-    const [activeItem, changeActiveItem] = useState(null);
+    const [activeItemCategories, changeActiveItemCategories] = React.useState(null);
 
     const changeClassOfActiveElement = (index) => {
-        changeActiveItem(index);
+        changeActiveItemCategories(index);
     }
 
     return (
@@ -13,7 +13,7 @@ function Categories({ items }) {
             <ul>
                 <li
                     onClick={() => changeClassOfActiveElement(null)}
-                    className={activeItem === null ? 'active' : ''} >
+                    className={activeItemCategories === null ? 'active' : ''} >
 
                     Все
                     
@@ -24,7 +24,7 @@ function Categories({ items }) {
                         return (
                             <li
                                 onClick={() => changeClassOfActiveElement(index)}
-                                className={activeItem === index ? 'active' : ''}
+                                className={activeItemCategories === index ? 'active' : ''}
                                 key={item} >
 
                                 {item}
