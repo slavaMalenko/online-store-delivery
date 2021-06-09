@@ -16,7 +16,6 @@ function App() {
     axios
       .get("http://localhost:3000/db.json")
       .then(response => {
-        debugger
         setPizzas(response.data.pizzas)
       })
   }, []);

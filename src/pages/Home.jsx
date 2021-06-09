@@ -34,7 +34,16 @@ function Home({ items }) {
             <h2 className="content__title">Все пиццы</h2>
             <div className="content__items">
                 {
-                    items.map(item => <PizzaBlock />)
+                    items.map(item => {
+                        return <PizzaBlock
+                            key={item.id}
+                            name={item.name}
+                            img={item.imageUrl}
+                            sizes={item.sizes}
+                            price={item.price}
+                            types={item.types} />
+
+                    })
                 }
             </div>
         </div>
