@@ -1,40 +1,61 @@
 import React from 'react';
-
+import { useSelector, useDispatch } from 'react-redux';
 
 import Categories from '../component/Categories';
 import PizzaBlock from '../component/PizzaBlock';
 import SortPopup from '../component/SortPopup';
 
+import { setCategory } from '../redux/actions/filters';
 
 
 
-function Home({ items }) {
+
+const categories = [
+    'Мясные',
+    'Вегетарианская',
+    'Гриль',
+    'Острые',
+    'Закрытые',
+]
+
+const sortItems = [
+    { name: 'популярности', type: 'popular' },
+    { name: 'цене', type: 'price' },
+    { name: 'алфавиту', type: 'alphabet' },
+]
+
+
+
+function Home() {
+
+    const dispatch = useDispatch();
+    const state = useSelector(({ pizzas }) => {
+        return {
+            items: pizzas.items,
+        }
+    });
+
+    const onSelectCategory = React.useCallback(index => {
+        dispatch(setCategory(index))
+    }, [])
+
     return (
         <div className="container">
             <div className="content__top">
 
                 <Categories
-                    items={[
-                        'Мясные',
-                        'Вегетарианская',
-                        'Гриль',
-                        'Острые',
-                        'Закрытые',
-                    ]} />
+                    onClickItem={onSelectCategory}
+                    items={categories} />
 
                 <SortPopup
-                    items={[
-                        { name: 'популярности', type: 'popular' },
-                        { name: 'цене', type: 'price' },
-                        { name: 'алфавиту', type: 'alphabet' },
-                    ]}
+                    items={sortItems}
                 />
 
             </div>
             <h2 className="content__title">Все пиццы</h2>
             <div className="content__items">
                 {
-                    items.map(item => {
+                    state.items.map(item => {
                         return <PizzaBlock
                             key={item.id}
                             name={item.name}

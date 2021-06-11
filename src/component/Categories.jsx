@@ -1,11 +1,12 @@
 import React from 'react';
 
-function Categories({ items }) {
+const Categories = React.memo(({ items, onClickItem }) => {
 
     const [activeItemCategories, changeActiveItemCategories] = React.useState(null);
 
     const changeClassOfActiveElement = (index) => {
         changeActiveItemCategories(index);
+        onClickItem(index);
     }
 
     return (
@@ -16,7 +17,7 @@ function Categories({ items }) {
                     className={activeItemCategories === null ? 'active' : ''} >
 
                     Все
-                    
+
                 </li>
 
                 {items &&
@@ -36,6 +37,6 @@ function Categories({ items }) {
             </ul>
         </div>
     )
-}
+})
 
 export default Categories;
