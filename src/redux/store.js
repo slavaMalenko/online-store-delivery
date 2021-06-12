@@ -1,8 +1,10 @@
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 
 import filtersReducer from './redusers/filters';
 import pizzasReducer from './redusers/pizzas';
 
+const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const redusers = combineReducers({
     filters: filtersReducer,
@@ -11,7 +13,7 @@ const redusers = combineReducers({
 
 const store = createStore(
     redusers,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    composeEnhancer(applyMiddleware(thunk)),
 );
 
 window.store = store;
