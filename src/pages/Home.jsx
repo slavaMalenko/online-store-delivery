@@ -6,6 +6,7 @@ import PizzaBlock from '../component/PizzaBlock';
 import SortPopup from '../component/SortPopup';
 
 import { setCategory } from '../redux/actions/filters';
+import { fetchPizzas } from './redux/actions/pizzas';
 
 
 
@@ -27,6 +28,14 @@ const sortItems = [
 
 
 function Home() {
+
+    const dispatch = useDispatch();
+    React.useEffect(() => {
+        dispatch(fetchPizzas());
+    }, [])
+
+
+
 
     const dispatch = useDispatch();
     const state = useSelector(({ pizzas }) => {
