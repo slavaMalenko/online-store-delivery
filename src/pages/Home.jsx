@@ -2,11 +2,12 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import Categories from '../component/Categories';
-import PizzaBlock from '../component/PizzaBlock';
+import PizzaBlock from '../component/Pizza/PizzaBlock';
 import SortPopup from '../component/SortPopup';
+import Placeholder from '../component/Pizza/Placeholder';
 
 import { setCategory } from '../redux/actions/filters';
-import { fetchPizzas } from './redux/actions/pizzas';
+import { fetchPizzas } from '../redux/actions/pizzas';
 
 
 
@@ -37,16 +38,20 @@ function Home() {
 
 
 
-    const dispatch = useDispatch();
     const state = useSelector(({ pizzas }) => {
         return {
             items: pizzas.items,
+            isLoading: pizzas.isLoading,
         }
     });
 
     const onSelectCategory = React.useCallback(index => {
         dispatch(setCategory(index))
     }, [])
+
+
+
+
 
     return (
         <div className="container">
@@ -63,8 +68,8 @@ function Home() {
             </div>
             <h2 className="content__title">Все пиццы</h2>
             <div className="content__items">
-                {
-                    state.items.map(item => {
+                {state.isLoading
+                    ? state.items.map(item => {
                         return <PizzaBlock
                             key={item.id}
                             name={item.name}
@@ -72,8 +77,8 @@ function Home() {
                             sizes={item.sizes}
                             price={item.price}
                             types={item.types} />
-
                     })
+                    : Array(12).fill(<Placeholder />)
                 }
             </div>
         </div>
