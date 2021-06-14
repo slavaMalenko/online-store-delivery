@@ -6,7 +6,7 @@ import PizzaBlock from '../component/Pizza/PizzaBlock';
 import SortPopup from '../component/SortPopup';
 import Placeholder from '../component/Pizza/Placeholder';
 
-import { setCategory } from '../redux/actions/filters';
+import { setCategory, setSortBy } from '../redux/actions/filters';
 import { fetchPizzas } from '../redux/actions/pizzas';
 
 
@@ -14,7 +14,7 @@ import { fetchPizzas } from '../redux/actions/pizzas';
 
 const categories = [
     'Мясные',
-    'Вегетарианская',
+    'Вегетарианские',
     'Гриль',
     'Острые',
     'Закрытые',
@@ -30,23 +30,33 @@ const sortItems = [
 
 function Home() {
 
-    const dispatch = useDispatch();
-    React.useEffect(() => {
-        dispatch(fetchPizzas());
-    }, [])
-
-
-
-
-    const state = useSelector(({ pizzas }) => {
+    const state = useSelector(({ pizzas, filters }) => {
         return {
             items: pizzas.items,
             isLoading: pizzas.isLoading,
+            sortBy: filters.sortBy,
+            category: filters.category,
         }
     });
 
-    const onSelectCategory = React.useCallback(index => {
+
+
+    const dispatch = useDispatch();
+
+    React.useEffect(() => {
+        dispatch(fetchPizzas(state.sortBy, state.category));
+    }, [state.sortBy, state.category])
+
+
+
+
+
+    const onClickItem = React.useCallback(index => {
         dispatch(setCategory(index))
+    }, [])
+
+    const onClickSortItem = React.useCallback(sort => {
+        dispatch(setSortBy(sort))
     }, [])
 
 
@@ -58,15 +68,18 @@ function Home() {
             <div className="content__top">
 
                 <Categories
-                    onClickItem={onSelectCategory}
-                    items={categories} />
+                    onClickItem={onClickItem}
+                    items={categories}
+                    activeItemCategories={state.category} />
 
                 <SortPopup
+                    activeItemSortPopup={state.sortBy}
+                    onClickSortPopup={onClickSortItem}
                     items={sortItems}
                 />
 
             </div>
-            <h2 className="content__title">Все пиццы</h2>
+            <h2 className="content__title">{state.category !== null ? categories[state.category] : 'Все'} пиццы</h2>
             <div className="content__items">
                 {state.isLoading
                     ? state.items.map(item => {
@@ -78,7 +91,7 @@ function Home() {
                             price={item.price}
                             types={item.types} />
                     })
-                    : Array(12).fill(<Placeholder />)
+                    : Array(4).fill(0).map((item, index) => <Placeholder key={index} />)
                 }
             </div>
         </div>
