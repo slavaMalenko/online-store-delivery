@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 
-function Button({ className, outline }) {
+function Button({ className, outline, totalPrice, totalCount }) {
 
     const clickButton = () => {
         console.log('Hello')
@@ -16,7 +16,7 @@ function Button({ className, outline }) {
                 { 'button--outline': outline },
             )}>
 
-            <span>520 ₽</span>
+            <span>{totalPrice} ₽</span>
             <div className="button__delimiter"></div>
             <svg
                 width="18"
@@ -47,7 +47,7 @@ function Button({ className, outline }) {
                     strokeLinejoin="round"
                 />
             </svg>
-            <span>3</span>
+            <span>{totalCount}</span>
 
         </button>
     )
