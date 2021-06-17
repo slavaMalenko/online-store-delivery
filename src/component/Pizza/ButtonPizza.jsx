@@ -1,14 +1,16 @@
 import React from 'react';
 import classNames from 'classnames';
 
-function ButtonPizza({ className, outline }) {
+function ButtonPizza({ className, outline, onClickAddPizza }) {
+
     return (
         <button
             className={classNames(
                 'button',
                 className,
                 { 'button--outline': outline },
-            )}>
+            )}
+            onClick={onClickAddPizza}>
 
             <svg
                 width="12"

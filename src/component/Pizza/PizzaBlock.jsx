@@ -2,17 +2,32 @@ import React from 'react';
 import ButtonPizza from './ButtonPizza';
 
 
-function PizzaBlock({ img, name, sizes, price, types }) {
+function PizzaBlock({ id, img, name, sizes, price, types, onAddPizza }) {
 
     const [activeType, setActiveType] = React.useState(0);
     const changeActiveType = (index) => {
         setActiveType(index)
     }
 
-    const [activeSize, setActiveSize] = React.useState(0);
-    const changeActiveSize = (index) => {
-        setActiveSize(index)
+    const [activeSize, setActiveSize] = React.useState(26);
+    const changeActiveSize = (item) => {
+        setActiveSize(item)
     }
+
+
+    const onClickAddPizza = () => {
+        const pizza = {
+            id,
+            name,
+            img,
+            price,
+            size: activeSize,
+            type: activeType === 0 ? 'тонкое' : 'традиционное',
+        }
+        onAddPizza(pizza)
+    }
+
+
 
     return (
         <div className="pizza-block">
@@ -45,8 +60,8 @@ function PizzaBlock({ img, name, sizes, price, types }) {
                             return (
                                 <li
                                     key={index}
-                                    onClick={() => changeActiveSize(index)}
-                                    className={activeSize === index ? 'active' : ''}>
+                                    onClick={() => changeActiveSize(item)}
+                                    className={activeSize === item ? 'active' : ''}>
 
                                     {item} см.
 
@@ -58,7 +73,11 @@ function PizzaBlock({ img, name, sizes, price, types }) {
             </div>
             <div className="pizza-block__bottom">
                 <div className="pizza-block__price">{price} ₽</div>
-                <ButtonPizza className="button--add" outline />
+
+                <ButtonPizza
+                    onClickAddPizza={onClickAddPizza}
+                    className="button--add"
+                    outline />
             </div>
         </div >
     )

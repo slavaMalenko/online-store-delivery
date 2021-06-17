@@ -8,6 +8,7 @@ import Placeholder from '../component/Pizza/Placeholder';
 
 import { setCategory, setSortBy } from '../redux/actions/filters';
 import { fetchPizzas } from '../redux/actions/pizzas';
+import { addPizzaToCart } from '../redux/actions/cart';
 
 
 
@@ -59,7 +60,9 @@ function Home() {
         dispatch(setSortBy(sort))
     }, [])
 
-
+    const handleAddPizzaToCart = (pizza) => {
+        dispatch(addPizzaToCart(pizza))
+    }
 
 
 
@@ -79,12 +82,15 @@ function Home() {
                 />
 
             </div>
+
             <h2 className="content__title">{state.category !== null ? categories[state.category] : 'Все'} пиццы</h2>
             <div className="content__items">
                 {state.isLoading
                     ? state.items.map(item => {
                         return <PizzaBlock
                             key={item.id}
+                            id={item.id}
+                            onAddPizza={handleAddPizzaToCart}
                             name={item.name}
                             img={item.imageUrl}
                             sizes={item.sizes}
