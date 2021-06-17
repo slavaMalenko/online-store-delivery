@@ -31,12 +31,13 @@ const sortItems = [
 
 function Home() {
 
-    const state = useSelector(({ pizzas, filters }) => {
+    const state = useSelector(({ pizzas, filters, cart }) => {
         return {
             items: pizzas.items,
             isLoading: pizzas.isLoading,
             sortBy: filters.sortBy,
             category: filters.category,
+            cartItems: cart.items,
         }
     });
 
@@ -89,8 +90,11 @@ function Home() {
                     ? state.items.map(item => {
                         return <PizzaBlock
                             key={item.id}
-                            id={item.id}
+
+                            addedCount={state.cartItems[item.id] && state.cartItems[item.id].length}
                             onAddPizza={handleAddPizzaToCart}
+
+                            id={item.id}
                             name={item.name}
                             img={item.imageUrl}
                             sizes={item.sizes}

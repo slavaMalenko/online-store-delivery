@@ -2,7 +2,7 @@ import React from 'react';
 import ButtonPizza from './ButtonPizza';
 
 
-function PizzaBlock({ id, img, name, sizes, price, types, onAddPizza }) {
+function PizzaBlock({ id, img, name, sizes, price, types, onAddPizza, addedCount }) {
 
     const [activeType, setActiveType] = React.useState(0);
     const changeActiveType = (index) => {
@@ -76,6 +76,7 @@ function PizzaBlock({ id, img, name, sizes, price, types, onAddPizza }) {
 
                 <ButtonPizza
                     onClickAddPizza={onClickAddPizza}
+                    addedCount={addedCount}
                     className="button--add"
                     outline />
             </div>

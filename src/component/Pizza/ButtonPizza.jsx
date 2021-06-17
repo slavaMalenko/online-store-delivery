@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 
-function ButtonPizza({ className, outline, onClickAddPizza }) {
+function ButtonPizza({ className, outline, onClickAddPizza, addedCount }) {
 
     return (
         <button
@@ -25,7 +25,7 @@ function ButtonPizza({ className, outline, onClickAddPizza }) {
                 />
             </svg>
             <span>Добавить</span>
-            <i>2</i>
+            {addedCount && <i>{addedCount}</i>}
 
         </button>
     )
