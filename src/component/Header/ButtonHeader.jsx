@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 
-function Button({ className, outline, totalPrice, totalCount }) {
+function ButtonHeader({ className, outline, totalPrice, totalCount }) {
 
     const clickButton = () => {
         console.log('Hello')
@@ -53,4 +53,4 @@ function Button({ className, outline, totalPrice, totalCount }) {
     )
 }
 
-export default Button;
+export default ButtonHeader;

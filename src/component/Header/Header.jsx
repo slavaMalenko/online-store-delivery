@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import logoSvg from '../../assets/img/pizza-logo.svg';
 
-import Button from './Button';
+import ButtonHeader from './ButtonHeader';
 
 
 function Header() {
@@ -29,7 +29,7 @@ function Header() {
                 </Link>
                 <div className="header__cart">
                     <Link to="/cart">
-                        <Button
+                        <ButtonHeader
                             totalPrice={state.totalPrice}
                             totalCount={state.totalCount}
                             className="button--cart" />
