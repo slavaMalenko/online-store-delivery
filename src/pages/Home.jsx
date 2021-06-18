@@ -91,7 +91,7 @@ function Home() {
                         return <PizzaBlock
                             key={item.id}
 
-                            addedCount={state.cartItems[item.id] && state.cartItems[item.id].length}
+                            addedCount={state.cartItems[item.id] && state.cartItems[item.id].items.length}
                             onAddPizza={handleAddPizzaToCart}
 
                             id={item.id}

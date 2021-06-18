@@ -3,13 +3,8 @@ import classNames from 'classnames';
 
 function ButtonHeader({ className, outline, totalPrice, totalCount }) {
 
-    const clickButton = () => {
-        console.log('Hello')
-    }
-
     return (
         <button
-            onClick={clickButton}
             className={classNames(
                 'button',
                 className,
