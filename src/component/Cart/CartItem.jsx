@@ -4,7 +4,7 @@ import CartItemDelete from './CartItemDelete';
 import CartButtonMinus from './CartButtonMinus';
 import CartButtonPlus from './CartButtonPlus';
 
-function CartItem({ id, name, img, type, size, totalPrice, totalPizzaCount, onRemove }) {
+function CartItem({ id, name, img, type, size, totalPrice, totalPizzaCount, onRemove, onMinusItem, onPlusItem }) {
 
     return (
         <div className="cart__item">
@@ -22,9 +22,9 @@ function CartItem({ id, name, img, type, size, totalPrice, totalPizzaCount, onRe
             </div>
 
             <div className="cart__item-count">
-                <CartButtonMinus className="button--circle" outline />
+                <CartButtonMinus id={id} onMinusItem={onMinusItem} className="button--circle" outline />
                 <b>{totalPizzaCount}</b>
-                <CartButtonPlus className="button--circle" outline />
+                <CartButtonPlus id={id} onPlusItem={onPlusItem} className="button--circle" outline />
             </div>
 
             <div className="cart__item-price">
