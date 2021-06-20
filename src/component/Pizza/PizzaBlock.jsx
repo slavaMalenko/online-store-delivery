@@ -14,13 +14,22 @@ function PizzaBlock({ id, img, name, sizes, price, types, onAddPizza, addedCount
         setActiveSize(item)
     }
 
+    let pricePizza = price;
+    if (activeSize === 26) {
+        pricePizza = price;
+    } else if (activeSize === 30) {
+        pricePizza = price + 250
+    } else {
+        pricePizza = price + 350
+    }
+
 
     const onClickAddPizza = () => {
         const pizza = {
             id,
             name,
             img,
-            price,
+            price: pricePizza,
             size: activeSize,
             type: activeType === 0 ? 'тонкое' : 'традиционное',
         }
@@ -72,7 +81,11 @@ function PizzaBlock({ id, img, name, sizes, price, types, onAddPizza, addedCount
                 </ul>
             </div>
             <div className="pizza-block__bottom">
-                <div className="pizza-block__price">{price} ₽</div>
+                <div className="pizza-block__price">
+                    {
+                        pricePizza
+                    }
+                    ₽</div>
 
                 <ButtonPizza
                     onClickAddPizza={onClickAddPizza}
